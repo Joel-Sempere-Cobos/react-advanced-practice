@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: bisque;
+  padding: 15px 30px;
+}
+
+.header-logo {
+  text-decoration: none;
+  color: black;
+  text-decoration: solid;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+  padding: 10px;
+  bottom: 0;
+}
+
+.navlinks {
+  margin: 10px;
+  color: blueviolet;
+  text-decoration: none;
+}
+
+.navlinks.active {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}

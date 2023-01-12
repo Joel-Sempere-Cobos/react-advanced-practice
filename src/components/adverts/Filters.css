@@ -1,0 +1,35 @@
+.adverts-filters-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 247, 235);
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.adverts-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-fieldset-radio {
+  border-color: transparent;
+}
+
+.filter-fieldset-radio input {
+  margin-right: 20px;
+  margin-left: -5px;
+}
+
+.byPrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+option {
+  text-align: center;
+}
