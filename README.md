@@ -1,4 +1,4 @@
-# Práctica de fundamentos de React
+# Práctica de React Avanzado con Redux
 
 Desarrollar un frontend con create-react-app. Se apoya en la API [Nodepop](https://github.com/davidjj76/nodepop-api).
 
