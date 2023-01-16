@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import AdvertsPage from './components/adverts/AdvertsPage.js';
 import LoginPage from './components/auth/LoginPage.js';
@@ -9,16 +8,20 @@ import NewAdvertPage from './components/adverts/NewAdvertPage.js';
 import RequireAuth from './components/auth/RequireAuth.js';
 import Layout from './components/layout/Layout.js';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsLogged } from './store/selectors.js';
+import { authLogin, authLogout } from './store/actions.js';
 
-function App({ isInitiallyLogged }) {
-  const [isLogged, setIsLogged] = useState(isInitiallyLogged);
+function App() {
+  const isLogged = useSelector(getIsLogged);
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
-    setIsLogged(true);
+    dispatch(authLogin());
   };
   const handleLogout = () => {
     logout();
-    setIsLogged(false);
+    dispatch(authLogout());
   };
 
   return (

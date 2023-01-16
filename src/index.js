@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Root store={store}>
-      <App isInitiallyLogged={!!accessToken} />
+      <App />
     </Root>
   </React.StrictMode>
 );
