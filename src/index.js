@@ -4,19 +4,19 @@ import './index.css';
 import App from './App';
 import storage from './utils/storage.js';
 import { setAuthorizationHeader } from './api/client.js';
-import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from './store/index.js';
+import Root from './Root.js';
 
 const accessToken = storage.get('Auth');
 setAuthorizationHeader(accessToken);
 
-const store = configureStore();
+const store = configureStore({ auth: !!accessToken });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Root store={store}>
       <App isInitiallyLogged={!!accessToken} />
-    </BrowserRouter>
+    </Root>
   </React.StrictMode>
 );
