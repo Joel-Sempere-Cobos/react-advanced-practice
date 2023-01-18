@@ -1,24 +1,19 @@
 import { useEffect, useState } from 'react';
 import Layout from '../layout/Layout.js';
-import { getAdverts } from './service.js';
 import './AdvertsPage.css';
 import { Link } from 'react-router-dom';
 import Filters from './Filters.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { advertsLoaded } from '../../store/actions.js';
+import { advertsLoad } from '../../store/actions.js';
 import { getAdvertsRedux } from '../../store/selectors.js';
-//TODO que no recargue los anuncios si ya los tiene cargados en redux
+
 const AdvertsPage = ({ onLogout }) => {
   const adverts = useSelector(getAdvertsRedux);
   const [filters, setFilters] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const execute = async () => {
-      const adverts = await getAdverts();
-      dispatch(advertsLoaded(adverts));
-    };
-    execute();
+    dispatch(advertsLoad());
   }, [dispatch]);
 
   const forSale = (sale) => {

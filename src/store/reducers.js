@@ -1,7 +1,5 @@
 import {
-  ADVERTS_LOADED,
-  AUTH_LOGIN_FAILURE,
-  AUTH_LOGIN_REQUEST,
+  ADVERTS_LOADED_SUCCESS,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
   UI_RESET_ERROR,
@@ -9,7 +7,10 @@ import {
 
 const defaultState = {
   auth: false,
-  adverts: [],
+  adverts: {
+    areLoaded: false,
+    data: [],
+  },
   ui: {
     isLoading: false,
     error: null,
@@ -29,8 +30,8 @@ export function auth(state = defaultState.auth, action) {
 
 export function adverts(state = defaultState.adverts, action) {
   switch (action.type) {
-    case ADVERTS_LOADED:
-      return action.payload;
+    case ADVERTS_LOADED_SUCCESS:
+      return { areLoaded: true, data: action.payload };
     default:
       return state;
   }
@@ -55,10 +56,3 @@ export function ui(state = defaultState.ui, action) {
 
   return state;
 }
-
-/* export default function reducer(state = defaultState, action) {
-  return {
-    auth: auth(state.auth, action),
-    adverts: adverts(state.adverts, action),
-  };
-} */

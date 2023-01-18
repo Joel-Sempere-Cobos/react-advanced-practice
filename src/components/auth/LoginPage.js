@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { login } from './service.js';
 import './LoginPage.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  authLogin,
-  authLoginFailure,
-  authLoginRequest,
-  authLoginSuccess,
-  uiResetError,
-} from '../../store/actions.js';
+import { authLogin, uiResetError } from '../../store/actions.js';
 import { getUi } from '../../store/selectors.js';
 
 const LoginPage = ({ onLogin, ...props }) => {
