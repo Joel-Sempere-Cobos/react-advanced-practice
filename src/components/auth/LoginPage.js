@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { login } from './service.js';
 import './LoginPage.css';
+import { useDispatch } from 'react-redux';
+import { authLoginSuccess } from '../../store/actions.js';
 
 const LoginPage = ({ onLogin, ...props }) => {
   const [email, setEmail] = useState('');
@@ -11,6 +13,7 @@ const LoginPage = ({ onLogin, ...props }) => {
   const [isFetching, setIsFetching] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChangeEmail = (event) => setEmail(event.target.value);
   const handleChangePassword = (event) => setPassword(event.target.value);
@@ -24,7 +27,7 @@ const LoginPage = ({ onLogin, ...props }) => {
       resetError();
       setIsFetching(true);
       await login({ email, password }, rememberMe);
-      onLogin();
+      dispatch(authLoginSuccess());
       const to = location.state?.from?.pathname || '/';
       navigate(to, { replace: true });
     } catch (error) {

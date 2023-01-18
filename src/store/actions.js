@@ -1,7 +1,7 @@
-import { ADVERTS_LOADED, AUTH_LOGIN, AUTH_LOGOUT } from './types.js';
+import { ADVERTS_LOADED, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT } from './types.js';
 
-export const authLogin = () => ({
-  type: AUTH_LOGIN,
+export const authLoginSuccess = () => ({
+  type: AUTH_LOGIN_SUCCESS,
 });
 
 export const authLogout = () => ({

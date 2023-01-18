@@ -10,15 +10,12 @@ import Layout from './components/layout/Layout.js';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsLogged } from './store/selectors.js';
-import { authLogin, authLogout } from './store/actions.js';
+import { authLogout } from './store/actions.js';
 
 function App() {
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
 
-  const handleLogin = () => {
-    dispatch(authLogin());
-  };
   const handleLogout = () => {
     logout();
     dispatch(authLogout());
@@ -27,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/login" element={<LoginPage />} />
 
         <Route
           path="/adverts"

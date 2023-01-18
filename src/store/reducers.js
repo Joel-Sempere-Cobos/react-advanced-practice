@@ -1,4 +1,4 @@
-import { ADVERTS_LOADED, AUTH_LOGIN, AUTH_LOGOUT } from './types.js';
+import { ADVERTS_LOADED, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT } from './types.js';
 
 const defaultState = {
   auth: false,
@@ -7,7 +7,7 @@ const defaultState = {
 
 export function auth(state = defaultState.auth, action) {
   switch (action.type) {
-    case AUTH_LOGIN:
+    case AUTH_LOGIN_SUCCESS:
       return true;
     case AUTH_LOGOUT:
       return false;
