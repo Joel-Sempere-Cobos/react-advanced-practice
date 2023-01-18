@@ -4,21 +4,25 @@ import { deleteAdvertById, getAdvertById } from './service.js';
 import './AdvertsPage.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../assets/broken-1.png';
+import { useSelector } from 'react-redux';
+import { getAdvertByIdRedux } from '../../store/selectors.js';
 
 const AdvertPage = ({ onLogout }) => {
-  const [advert, setAdvert] = useState('');
+  const { id } = useParams();
+
+  const advert = useSelector(getAdvertByIdRedux(id));
+  //const dispatch = useDispatch();
   const [deleteAd, setDeleteAd] = useState(false);
   const [deletedAd, setDeletedAd] = useState(false);
-  const location = useLocation();
+  //const location = useLocation();
 
-  const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /* useEffect(() => {
     const execute = async () => {
       try {
         const advert = await getAdvertById(id);
-        setAdvert(advert);
+        dispatch(advertsLoaded(advert));
       } catch (error) {
         if (error.status === 404) {
           const to = location.state?.from?.pathname || '/404';
@@ -27,7 +31,7 @@ const AdvertPage = ({ onLogout }) => {
       }
     };
     execute();
-  }, [id, navigate, location]);
+  }, [id, navigate, location, dispatch]); */
 
   const forSale = (sale) => {
     return sale ? 'Vendo' : 'Compro';
