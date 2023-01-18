@@ -2,41 +2,46 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { login } from './service.js';
 import './LoginPage.css';
-import { useDispatch } from 'react-redux';
-import { authLoginSuccess } from '../../store/actions.js';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  authLoginFailure,
+  authLoginRequest,
+  authLoginSuccess,
+  uiResetError,
+} from '../../store/actions.js';
+import { getUi } from '../../store/selectors.js';
 
 const LoginPage = ({ onLogin, ...props }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const { isLoading, error } = useSelector(getUi);
+
   const location = useLocation();
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const handleChangeEmail = (event) => setEmail(event.target.value);
   const handleChangePassword = (event) => setPassword(event.target.value);
-  const resetError = () => setError(null);
 
+  const resetError = () => dispatch(uiResetError());
   const handleRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      resetError();
-      setIsFetching(true);
+      dispatch(authLoginRequest());
       await login({ email, password }, rememberMe);
       dispatch(authLoginSuccess());
       const to = location.state?.from?.pathname || '/';
       navigate(to, { replace: true });
     } catch (error) {
-      setError(error);
-      setIsFetching(false);
+      dispatch(authLoginFailure(error));
     }
   };
 
-  const isButtonEnabled = () => email.length && password.length && !isFetching;
+  const isButtonEnabled = () => email.length && password.length && !isLoading;
 
   return (
     <div className="form-page-container">
