@@ -4,18 +4,22 @@ import { getAdverts } from './service.js';
 import './AdvertsPage.css';
 import { Link } from 'react-router-dom';
 import Filters from './Filters.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { advertsLoaded } from '../../store/actions.js';
+import { getAdvertsRedux } from '../../store/selectors.js';
 
 const AdvertsPage = ({ onLogout }) => {
-  const [adverts, setAdverts] = useState([]);
+  const adverts = useSelector(getAdvertsRedux);
   const [filters, setFilters] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const execute = async () => {
       const adverts = await getAdverts();
-      setAdverts(adverts);
+      dispatch(advertsLoaded(adverts));
     };
     execute();
-  }, []);
+  }, [dispatch]);
 
   const forSale = (sale) => {
     return sale ? 'Vendo' : 'Compro';
