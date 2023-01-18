@@ -1,3 +1,4 @@
+import { login } from '../components/auth/service.js';
 import {
   ADVERTS_LOADED,
   AUTH_LOGIN_FAILURE,
@@ -23,6 +24,17 @@ export const authLoginFailure = (error) => ({
   error: true,
 });
 
+export const authLogin = (credentials, rememberMe) => {
+  return async function (dispatch, getState) {
+    try {
+      dispatch(authLoginRequest());
+      await login(credentials, rememberMe);
+      dispatch(authLoginSuccess());
+    } catch (error) {
+      dispatch(authLoginFailure(error));
+    }
+  };
+};
 /////////// AUTH_LOGOUT
 
 export const authLogout = () => ({

@@ -37,19 +37,23 @@ export function adverts(state = defaultState.adverts, action) {
 }
 
 export function ui(state = defaultState.ui, action) {
-  switch (action.type) {
-    case AUTH_LOGIN_REQUEST:
-      return { isLoading: true, error: null };
-    case AUTH_LOGIN_SUCCESS:
-      return { isLoading: false, error: null };
-    case AUTH_LOGIN_FAILURE:
-      return { isLoading: false, error: action.payload };
-    case UI_RESET_ERROR:
-      return { ...state, error: null };
-
-    default:
-      return state;
+  if (action.error) {
+    return { isLoading: false, error: action.payload };
   }
+
+  if (/_REQUEST$/.test(action.type)) {
+    return { isLoading: true, error: null };
+  }
+
+  if (/_SUCCESS$/.test(action.type)) {
+    return { isLoading: false, error: null };
+  }
+
+  if (action.type === UI_RESET_ERROR) {
+    return { ...state, error: null };
+  }
+
+  return state;
 }
 
 /* export default function reducer(state = defaultState, action) {

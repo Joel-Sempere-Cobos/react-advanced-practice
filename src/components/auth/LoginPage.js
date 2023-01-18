@@ -4,6 +4,7 @@ import { login } from './service.js';
 import './LoginPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  authLogin,
   authLoginFailure,
   authLoginRequest,
   authLoginSuccess,
@@ -30,15 +31,10 @@ const LoginPage = ({ onLogin, ...props }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      dispatch(authLoginRequest());
-      await login({ email, password }, rememberMe);
-      dispatch(authLoginSuccess());
+    dispatch(authLogin({ email, password }, rememberMe)).then(() => {
       const to = location.state?.from?.pathname || '/';
       navigate(to, { replace: true });
-    } catch (error) {
-      dispatch(authLoginFailure(error));
-    }
+    });
   };
 
   const isButtonEnabled = () => email.length && password.length && !isLoading;

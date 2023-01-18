@@ -7,7 +7,7 @@ import Filters from './Filters.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertsLoaded } from '../../store/actions.js';
 import { getAdvertsRedux } from '../../store/selectors.js';
-
+//TODO que no recargue los anuncios si ya los tiene cargados en redux
 const AdvertsPage = ({ onLogout }) => {
   const adverts = useSelector(getAdvertsRedux);
   const [filters, setFilters] = useState([]);

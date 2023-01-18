@@ -18,6 +18,8 @@ const AdvertPage = ({ onLogout }) => {
 
   const navigate = useNavigate();
 
+  // TODO que cargue el anuncio si no lo tiene ya en redux
+
   /* useEffect(() => {
     const execute = async () => {
       try {
