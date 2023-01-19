@@ -11,15 +11,13 @@ import { advertLoad } from '../../store/actions.js';
 const AdvertPage = ({ onLogout }) => {
   const { id } = useParams();
 
-  const advert = useSelector(getAdvertByIdRedux(id));
+  const advert = useSelector(getAdvertByIdRedux(id)) || {};
   const dispatch = useDispatch();
   const [deleteAd, setDeleteAd] = useState(false);
   const [deletedAd, setDeletedAd] = useState(false);
   const location = useLocation();
 
   const navigate = useNavigate();
-
-  // TODO que cargue el anuncio si no lo tiene ya en redux
 
   useEffect(() => {
     dispatch(advertLoad(id)).catch((error) => {
