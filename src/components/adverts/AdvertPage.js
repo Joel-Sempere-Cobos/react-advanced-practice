@@ -1,39 +1,34 @@
 import { useEffect, useState } from 'react';
 import Layout from '../layout/Layout.js';
-import { deleteAdvertById, getAdvertById } from './service.js';
+import { deleteAdvertById } from './service.js';
 import './AdvertsPage.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../assets/broken-1.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAdvertByIdRedux } from '../../store/selectors.js';
+import { advertLoad } from '../../store/actions.js';
 
 const AdvertPage = ({ onLogout }) => {
   const { id } = useParams();
 
   const advert = useSelector(getAdvertByIdRedux(id));
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [deleteAd, setDeleteAd] = useState(false);
   const [deletedAd, setDeletedAd] = useState(false);
-  //const location = useLocation();
+  const location = useLocation();
 
   const navigate = useNavigate();
 
   // TODO que cargue el anuncio si no lo tiene ya en redux
 
-  /* useEffect(() => {
-    const execute = async () => {
-      try {
-        const advert = await getAdvertById(id);
-        dispatch(advertsLoaded(advert));
-      } catch (error) {
-        if (error.status === 404) {
-          const to = location.state?.from?.pathname || '/404';
-          navigate(to, { replace: true });
-        }
+  useEffect(() => {
+    dispatch(advertLoad(id)).catch((error) => {
+      if (error.status === 404) {
+        const to = location.state?.from?.pathname || '/404';
+        navigate(to, { replace: true });
       }
-    };
-    execute();
-  }, [id, navigate, location, dispatch]); */
+    });
+  }, [id, navigate, location, dispatch]);
 
   const forSale = (sale) => {
     return sale ? 'Vendo' : 'Compro';

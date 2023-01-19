@@ -1,5 +1,6 @@
 import {
   ADVERTS_LOADED_SUCCESS,
+  ADVERT_LOADED_SUCCESS,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
   UI_RESET_ERROR,
@@ -32,6 +33,8 @@ export function adverts(state = defaultState.adverts, action) {
   switch (action.type) {
     case ADVERTS_LOADED_SUCCESS:
       return { areLoaded: true, data: action.payload };
+    case ADVERT_LOADED_SUCCESS:
+      return { ...state, data: [...state.data, action.payload] };
     default:
       return state;
   }
