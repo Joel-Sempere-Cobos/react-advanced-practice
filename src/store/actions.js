@@ -19,7 +19,7 @@ import {
   AUTH_LOGOUT_FAILURE,
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
-  TAGS_LOADED_SUCCESS,
+  API_TAGS_LOADED_SUCCESS,
   UI_RESET_ERROR,
 } from './types.js';
 
@@ -209,7 +209,7 @@ export const advertDelete = (id) => {
 //////////// TAGS LOADED
 
 export const apiTagsLoadedSuccess = (tags) => ({
-  type: TAGS_LOADED_SUCCESS,
+  type: API_TAGS_LOADED_SUCCESS,
   payload: tags,
 });
 

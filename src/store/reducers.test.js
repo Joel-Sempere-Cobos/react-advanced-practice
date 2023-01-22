@@ -67,7 +67,7 @@ describe('adverts', () => {
     expect(result).toMatchObject({ ...state, data: [{ id: 0 }] });
   });
 
-  test('should manage "TAGS_LOADED_SUCCESS"', () => {
+  test('should manage "API_TAGS_LOADED_SUCCESS"', () => {
     const payload = [];
     const action = apiTagsLoadedSuccess(payload);
     const result = adverts(state, action);
