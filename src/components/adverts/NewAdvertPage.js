@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { advertCreate } from '../../store/actions.js';
 import Layout from '../layout/Layout.js';
-import { createAdvert } from './service.js';
 import './NewAdvertPage.css';
 
 const NewAdvertPage = ({ onLogout }) => {
@@ -14,6 +15,7 @@ const NewAdvertPage = ({ onLogout }) => {
 
   const formData = new FormData();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -51,7 +53,7 @@ const NewAdvertPage = ({ onLogout }) => {
       formData.append('tags', tags);
       photo && formData.append('photo', photo);
 
-      const createdAdvert = await createAdvert(formData);
+      const createdAdvert = await dispatch(advertCreate(formData));
       navigate(`/adverts/${createdAdvert.id}`);
     } catch (error) {
       if (error.status === 401) {

@@ -4,6 +4,9 @@ import {
   ADVERTS_LOADED_FAILURE,
   ADVERTS_LOADED_REQUEST,
   ADVERTS_LOADED_SUCCESS,
+  ADVERT_CREATED_FAILURE,
+  ADVERT_CREATED_REQUEST,
+  ADVERT_CREATED_SUCCESS,
   ADVERT_LOADED_FAILURE,
   ADVERT_LOADED_REQUEST,
   ADVERT_LOADED_SUCCESS,
@@ -68,6 +71,7 @@ export const authLogout = () => {
       dispatch(authLogoutSuccess());
     } catch (error) {
       dispatch(authLoginFailure(error));
+      throw error;
     }
   };
 };
@@ -131,6 +135,37 @@ export const advertLoad = (id) => {
       dispatch(advertLoadedSuccess(advert));
     } catch (error) {
       dispatch(advertLoadedFailure(error));
+      throw error;
+    }
+  };
+};
+
+//////////// CREATE ADVERT
+
+export const advertCreatedRequest = () => ({
+  type: ADVERT_CREATED_REQUEST,
+});
+
+export const advertCreatedSuccess = (advert) => ({
+  type: ADVERT_CREATED_SUCCESS,
+  payload: advert,
+});
+
+export const advertCreatedFailure = (error) => ({
+  type: ADVERT_CREATED_FAILURE,
+  payload: error,
+  error: true,
+});
+
+export const advertCreate = (formData) => {
+  return async function (dispatch, getState, { api }) {
+    try {
+      dispatch(advertCreatedRequest());
+      const createdAdvert = await api.adverts.createAdvert(formData);
+      dispatch(advertCreatedSuccess(createdAdvert));
+      return createdAdvert;
+    } catch (error) {
+      dispatch(advertCreatedFailure(error));
       throw error;
     }
   };
