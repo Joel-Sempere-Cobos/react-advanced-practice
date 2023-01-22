@@ -10,7 +10,7 @@ const NewAdvertPage = ({ onLogout }) => {
   const [name, setName] = useState('');
   const [sale, setSale] = useState('');
   const apiTags = useSelector(getApiTags);
-  const tags = [];
+  const [tags, setTags] = useState([]);
   const [price, setPrice] = useState('');
   const [photo, setPhoto] = useState(null);
   const { isLoading } = useSelector(getUi);
@@ -33,11 +33,11 @@ const NewAdvertPage = ({ onLogout }) => {
   };
 
   const handleChangeTags = (event) => {
-    /* const tagsArray = Array.from(event.target.selectedOptions);
+    const tagsArray = Array.from(event.target.selectedOptions);
     const tags = tagsArray.map((option) => {
       return option.value;
     });
-    setTags(tags); */
+    setTags(tags);
   };
 
   const handleChangePrice = (event) => {
@@ -116,6 +116,7 @@ const NewAdvertPage = ({ onLogout }) => {
                   onChange={handleChangeTags}
                   name="Tags"
                   id="Tags"
+                  value={tags}
                 >
                   {apiTags.map((tag) => (
                     <option value={tag} id={tag}>

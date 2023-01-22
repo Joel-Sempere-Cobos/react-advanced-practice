@@ -1,10 +1,8 @@
 import './Filters.css';
-import { useState } from 'react';
-
-/* import Slider from 'rc-slider';
- import 'rc-slider/assets/index.css';*/
-/* import storage from '../../utils/storage.js';
- */
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getApiTags } from '../../store/selectors.js';
+import { apiTagsLoad } from '../../store/actions.js';
 
 const Filters = ({ getAdvertsFilter }) => {
   const [name, setName] = useState('');
@@ -13,7 +11,13 @@ const Filters = ({ getAdvertsFilter }) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
+  const apiTags = useSelector(getApiTags);
+  const dispatch = useDispatch();
   const filters = [name, sale, minPrice, maxPrice, tags];
+
+  useEffect(() => {
+    dispatch(apiTagsLoad());
+  }, [dispatch]);
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -105,8 +109,6 @@ const Filters = ({ getAdvertsFilter }) => {
             onChange={handleChangeMaxPrice}
             value={maxPrice}
           />
-
-          {/* <Slider value={[0, 1000]} range /> */}
         </div>
 
         <div>
@@ -122,18 +124,11 @@ const Filters = ({ getAdvertsFilter }) => {
             <option value="" id="none">
               ---
             </option>
-            <option value="lifestyle" id="lifestyle">
-              Lifestyle
-            </option>
-            <option value="mobile" id="mobile">
-              Mobile
-            </option>
-            <option value="motor" id="motor">
-              Motor
-            </option>
-            <option value="work" id="work">
-              Work
-            </option>
+            {apiTags.map((tag) => (
+              <option value={tag} id={tag}>
+                {`${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
+              </option>
+            ))}
           </select>
         </div>
 
