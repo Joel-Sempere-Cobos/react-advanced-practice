@@ -37,7 +37,7 @@ export function adverts(state = defaultState.adverts, action) {
     case ADVERT_LOADED_SUCCESS:
       return { ...state, data: [action.payload] };
     case ADVERT_CREATED_SUCCESS:
-      return { ...state, data: [action.payload, ...state.data] };
+      return { ...state, data: [...state.data, action.payload] };
     default:
       return state;
   }
