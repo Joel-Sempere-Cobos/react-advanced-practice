@@ -119,7 +119,7 @@ const NewAdvertPage = ({ onLogout }) => {
                   value={tags}
                 >
                   {apiTags.map((tag) => (
-                    <option value={tag} id={tag}>
+                    <option key={tag} value={tag} id={tag}>
                       {`${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
                     </option>
                   ))}

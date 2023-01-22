@@ -124,11 +124,13 @@ const Filters = ({ getAdvertsFilter }) => {
             <option value="" id="none">
               ---
             </option>
-            {apiTags.map((tag) => (
-              <option value={tag} id={tag}>
-                {`${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
-              </option>
-            ))}
+            {apiTags.map((tag) => {
+              return (
+                <option key={tag} value={tag} id={tag}>
+                  {`${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
+                </option>
+              );
+            })}
           </select>
         </div>
 
