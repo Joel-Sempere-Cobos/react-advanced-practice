@@ -6,7 +6,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../assets/broken-1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdvertByIdRedux } from '../../store/selectors.js';
-import { advertLoad } from '../../store/actions.js';
+import { advertDelete, advertLoad } from '../../store/actions.js';
 
 const AdvertPage = ({ onLogout }) => {
   const { id } = useParams();
@@ -37,7 +37,7 @@ const AdvertPage = ({ onLogout }) => {
   };
 
   const handleDeleteAd = () => {
-    deleteAdvertById(id);
+    dispatch(advertDelete(id));
     setDeletedAd(true);
     setTimeout(() => {
       navigate('/adverts');

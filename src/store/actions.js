@@ -7,6 +7,9 @@ import {
   ADVERT_CREATED_FAILURE,
   ADVERT_CREATED_REQUEST,
   ADVERT_CREATED_SUCCESS,
+  ADVERT_DELETED_FAILURE,
+  ADVERT_DELETED_REQUEST,
+  ADVERT_DELETED_SUCCESS,
   ADVERT_LOADED_FAILURE,
   ADVERT_LOADED_REQUEST,
   ADVERT_LOADED_SUCCESS,
@@ -166,6 +169,37 @@ export const advertCreate = (formData) => {
       return createdAdvert;
     } catch (error) {
       dispatch(advertCreatedFailure(error));
+      throw error;
+    }
+  };
+};
+
+//////////// DELETE ADVERT
+
+export const advertDeletedRequest = () => ({
+  type: ADVERT_DELETED_REQUEST,
+});
+
+export const advertDeletedSuccess = (advert) => ({
+  type: ADVERT_DELETED_SUCCESS,
+  payload: advert,
+});
+
+export const advertDeletedFailure = (error) => ({
+  type: ADVERT_DELETED_FAILURE,
+  payload: error,
+  error: true,
+});
+
+export const advertDelete = (id) => {
+  return async function (dispatch, getState, { api }) {
+    try {
+      dispatch(advertDeletedRequest());
+      await api.adverts.deleteAdvertById(id);
+      const advert = getState().adverts.data.find((advert) => advert.id === id);
+      dispatch(advertDeletedSuccess(advert));
+    } catch (error) {
+      dispatch(advertDeletedFailure(error));
       throw error;
     }
   };
