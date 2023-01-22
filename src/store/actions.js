@@ -1,4 +1,5 @@
 import { areAdvertsLoaded, getAdvertByIdRedux } from './selectors.js';
+
 import {
   ADVERTS_LOADED_FAILURE,
   ADVERTS_LOADED_REQUEST,
@@ -9,7 +10,9 @@ import {
   AUTH_LOGIN_FAILURE,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_FAILURE,
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
   UI_RESET_ERROR,
 } from './types.js';
 
@@ -43,9 +46,31 @@ export const authLogin = (credentials, rememberMe) => {
 };
 /////////// AUTH_LOGOUT
 
-export const authLogout = () => ({
-  type: AUTH_LOGOUT,
+export const authLogoutRequest = () => ({
+  type: AUTH_LOGOUT_REQUEST,
 });
+
+export const authLogoutSuccess = () => ({
+  type: AUTH_LOGOUT_SUCCESS,
+});
+
+export const authLogoutFailure = (error) => ({
+  type: AUTH_LOGOUT_FAILURE,
+  payload: error,
+  error: true,
+});
+
+export const authLogout = () => {
+  return async function (dispatch, getState, { api }) {
+    try {
+      dispatch(authLogoutRequest());
+      await api.auth.logout();
+      dispatch(authLogoutSuccess());
+    } catch (error) {
+      dispatch(authLoginFailure(error));
+    }
+  };
+};
 
 /////////// ADVERTS
 

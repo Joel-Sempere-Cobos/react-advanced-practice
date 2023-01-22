@@ -2,7 +2,7 @@ import {
   ADVERTS_LOADED_SUCCESS,
   ADVERT_LOADED_SUCCESS,
   AUTH_LOGIN_SUCCESS,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_SUCCESS,
   UI_RESET_ERROR,
 } from './types.js';
 
@@ -22,7 +22,7 @@ export function auth(state = defaultState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
       return true;
-    case AUTH_LOGOUT:
+    case AUTH_LOGOUT_SUCCESS:
       return false;
     default:
       return state;

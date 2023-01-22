@@ -1,7 +1,7 @@
 import './App.css';
 import AdvertsPage from './components/adverts/AdvertsPage.js';
 import LoginPage from './components/auth/LoginPage.js';
-import { logout } from './components/auth/service.js';
+
 import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import AdvertPage from './components/adverts/AdvertPage.js';
 import NewAdvertPage from './components/adverts/NewAdvertPage.js';
@@ -17,7 +17,6 @@ function App() {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    logout();
     dispatch(authLogout());
   };
 
