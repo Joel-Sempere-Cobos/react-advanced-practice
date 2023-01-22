@@ -40,7 +40,7 @@ const Filters = ({ getAdvertsFilter }) => {
     setTags(tags);
   };
 
-  //TODO controlar que precio minimo sea menor que máximo y viceversa
+  //TODO controlar que precio mínimo sea menor que máximo y viceversa
   const handleChangeMinPrice = (event) => {
     if (event.target.value === '') {
       setMinPrice('');
@@ -60,12 +60,6 @@ const Filters = ({ getAdvertsFilter }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     getAdvertsFilter(filters);
-
-    /* storage.set('name', name);
-    storage.set('sale', sale);
-    storage.set('minPrice', minPrice);
-    storage.set('maxPrice', maxPrice);
-    storage.set('tags', tags); */
   };
 
   return (

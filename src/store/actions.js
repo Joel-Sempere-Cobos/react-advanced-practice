@@ -19,6 +19,7 @@ import {
   AUTH_LOGOUT_FAILURE,
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
+  TAGS_LOADED_SUCCESS,
   UI_RESET_ERROR,
 } from './types.js';
 
@@ -200,6 +201,32 @@ export const advertDelete = (id) => {
       dispatch(advertDeletedSuccess(advert));
     } catch (error) {
       dispatch(advertDeletedFailure(error));
+      throw error;
+    }
+  };
+};
+
+//////////// TAGS LOADED
+
+export const apiTagsLoadedSuccess = (tags) => ({
+  type: TAGS_LOADED_SUCCESS,
+  payload: tags,
+});
+
+export const apiTagsLoadedFailure = (error) => ({
+  type: ADVERT_DELETED_FAILURE,
+  payload: error,
+  error: true,
+});
+
+export const apiTagsLoad = () => {
+  return async function (dispatch, getState, { api }) {
+    if (getState().adverts.apiTags.length) return;
+    try {
+      const tags = await api.adverts.getTags();
+      dispatch(apiTagsLoadedSuccess(tags));
+    } catch (error) {
+      dispatch(apiTagsLoadedFailure(error));
       throw error;
     }
   };

@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { advertCreate } from '../../store/actions.js';
-import { getUi } from '../../store/selectors.js';
+import { advertCreate, apiTagsLoad } from '../../store/actions.js';
+import { getApiTags, getUi } from '../../store/selectors.js';
 import Layout from '../layout/Layout.js';
 import './NewAdvertPage.css';
 
 const NewAdvertPage = ({ onLogout }) => {
   const [name, setName] = useState('');
   const [sale, setSale] = useState('');
-  const [tags, setTags] = useState([]);
+  const apiTags = useSelector(getApiTags);
+  const tags = [];
   const [price, setPrice] = useState('');
   const [photo, setPhoto] = useState(null);
   const { isLoading } = useSelector(getUi);
@@ -17,6 +18,10 @@ const NewAdvertPage = ({ onLogout }) => {
   const formData = new FormData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(apiTagsLoad());
+  }, [dispatch]);
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -28,11 +33,11 @@ const NewAdvertPage = ({ onLogout }) => {
   };
 
   const handleChangeTags = (event) => {
-    const tagsArray = Array.from(event.target.selectedOptions);
+    /* const tagsArray = Array.from(event.target.selectedOptions);
     const tags = tagsArray.map((option) => {
       return option.value;
     });
-    setTags(tags);
+    setTags(tags); */
   };
 
   const handleChangePrice = (event) => {
@@ -101,8 +106,6 @@ const NewAdvertPage = ({ onLogout }) => {
                   onChange={handleChangePrice}
                   value={price}
                 />
-
-                {/* <Slider value={[0, 1000]} range /> */}
               </div>
 
               <div>
@@ -113,20 +116,12 @@ const NewAdvertPage = ({ onLogout }) => {
                   onChange={handleChangeTags}
                   name="Tags"
                   id="Tags"
-                  value={tags}
                 >
-                  <option value="lifestyle" id="lifestyle">
-                    Lifestyle
-                  </option>
-                  <option value="mobile" id="mobile">
-                    Mobile
-                  </option>
-                  <option value="motor" id="motor">
-                    Motor
-                  </option>
-                  <option value="work" id="work">
-                    Work
-                  </option>
+                  {apiTags.map((tag) => (
+                    <option value={tag} id={tag}>
+                      {`${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
+                    </option>
+                  ))}
                 </select>
               </div>
 

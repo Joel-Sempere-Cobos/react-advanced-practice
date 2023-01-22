@@ -22,3 +22,8 @@ export const createAdvert = (formData) => {
   const url = `${advertsUrl}`;
   return client.post(url, formData, config);
 };
+
+export const getTags = () => {
+  const url = `${advertsUrl}/tags`;
+  return client.get(url);
+};
