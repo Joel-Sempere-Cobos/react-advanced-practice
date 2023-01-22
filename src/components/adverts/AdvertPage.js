@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Layout from '../layout/Layout.js';
-import { deleteAdvertById } from './service.js';
 import './AdvertsPage.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../assets/broken-1.png';
