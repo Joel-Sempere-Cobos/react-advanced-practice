@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { advertCreate } from '../../store/actions.js';
+import { getUi } from '../../store/selectors.js';
 import Layout from '../layout/Layout.js';
 import './NewAdvertPage.css';
 
@@ -11,7 +12,7 @@ const NewAdvertPage = ({ onLogout }) => {
   const [tags, setTags] = useState([]);
   const [price, setPrice] = useState('');
   const [photo, setPhoto] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const { isLoading } = useSelector(getUi);
 
   const formData = new FormData();
   const navigate = useNavigate();
@@ -45,8 +46,6 @@ const NewAdvertPage = ({ onLogout }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      setIsFetching(true);
-
       formData.append('name', name);
       formData.append('sale', sale);
       formData.append('price', price);
@@ -59,12 +58,10 @@ const NewAdvertPage = ({ onLogout }) => {
       if (error.status === 401) {
         navigate('/login');
       }
-      console.log(error);
-      setIsFetching(false);
     }
   };
 
-  const isDisabled = () => !(name && (sale || !sale) && tags.length && price) || isFetching;
+  const isDisabled = () => !(name && (sale || !sale) && tags.length && price) || isLoading;
 
   return (
     <div>
