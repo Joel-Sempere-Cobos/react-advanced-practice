@@ -121,7 +121,7 @@ const Filters = ({ getAdvertsFilter }) => {
             onChange={handleChangeTags}
             value={tags}
           >
-            <option value="" id="none">
+            <option key="none" value="" id="none">
               ---
             </option>
             {apiTags.map((tag) => {

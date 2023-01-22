@@ -3,13 +3,13 @@ import {
   ADVERT_CREATED_SUCCESS,
   ADVERT_DELETED_SUCCESS,
   ADVERT_LOADED_SUCCESS,
+  API_TAGS_LOADED_SUCCESS,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT_SUCCESS,
-  TAGS_LOADED_SUCCESS,
   UI_RESET_ERROR,
 } from './types.js';
 
-const defaultState = {
+export const defaultState = {
   auth: false,
   adverts: {
     areLoaded: false,
@@ -44,7 +44,7 @@ export function adverts(state = defaultState.adverts, action) {
     case ADVERT_DELETED_SUCCESS:
       const deletedAdvertList = state.data.filter((advert) => advert.id !== action.payload.id);
       return { ...state, data: deletedAdvertList };
-    case TAGS_LOADED_SUCCESS:
+    case API_TAGS_LOADED_SUCCESS:
       return { ...state, apiTags: action.payload };
     default:
       return state;
