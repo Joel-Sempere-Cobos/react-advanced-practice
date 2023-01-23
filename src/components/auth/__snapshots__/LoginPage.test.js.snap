@@ -35,6 +35,7 @@ exports[`LoginPage snapshot 1`] = `
           Contraseña
         </label>
         <input
+          id="password"
           name="password"
           type="password"
           value=""

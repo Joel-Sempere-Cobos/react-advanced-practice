@@ -24,10 +24,13 @@ const LoginPage = ({ onLogin, ...props }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(authLogin({ email, password }, rememberMe)).then(() => {
-      const to = location.state?.from?.pathname || '/';
-      navigate(to, { replace: true });
-    });
+    console.log('1');
+    await dispatch(authLogin({ email, password }, rememberMe));
+    console.log('2');
+
+    const to = location.state?.from?.pathname || '/';
+    navigate(to, { replace: true });
+    console.log('3');
   };
 
   const isButtonEnabled = () => email.length && password.length && !isLoading;
@@ -49,7 +52,13 @@ const LoginPage = ({ onLogin, ...props }) => {
         </div>
         <div className="password-form">
           <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password" onChange={handleChangePassword} value={password} />
+          <input
+            id="password"
+            type="password"
+            name="password"
+            onChange={handleChangePassword}
+            value={password}
+          />
         </div>
 
         <div className="rememberMe-form">
