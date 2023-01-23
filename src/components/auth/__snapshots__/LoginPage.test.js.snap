@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage snapshot 1`] = `
+<div>
+  <div
+    class="form-page-container"
+  >
+    <h1>
+      Bienvenido@ a Wakapop
+    </h1>
+    <form
+      class="form"
+    >
+      <div
+        class="email-form"
+      >
+        <label
+          for="email"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="password-form"
+      >
+        <label
+          for="password"
+        >
+          Contraseña
+        </label>
+        <input
+          name="password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        class="rememberMe-form"
+      >
+        <label
+          for="rememberMe"
+        >
+          Recuérdame
+        </label>
+        <input
+          id="rememberMe"
+          name="rememberMe"
+          type="checkbox"
+        />
+      </div>
+      <div
+        class="submit-form"
+      >
+        <button
+          disabled=""
+          type="submit"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
