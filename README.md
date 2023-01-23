@@ -1,34 +1,40 @@
 # Práctica de React Avanzado con Redux
 
-Desarrollar un frontend con create-react-app. Se apoya en la API [Nodepop](https://github.com/davidjj76/nodepop-api).
+Añadir Redux a la [práctica de fundamentos de React](https://github.com/Joel-Sempere-Cobos/react-fundaments-practice) que ya realizamos. Crear un store con datos de la sesión del usuario, los anuncios y ui, y gestionar los estados relacionados con ellos desde redux.
 
-## Página de login
+Crear tests con Jest para reducers, acciones y selectores, síncronos y asíncronos, así como test de snapshot y test de componente.
 
-El usuario puede introducir email y contraseña. Si son erróneos recibe un mensaje de "unauthorized". Si son correctos recibe el token y es redirigido. Ahora puede navegar por el resto de la página.
+Se apoya en la API [Nodepop](https://github.com/davidjj76/nodepop-api).
 
-Si marca la casilla de "recuérdame", el token se almacena en el Local Storage.
+## Carga de tags desde la API
 
-## Layout
+En la práctica de fundamentos los tags estaban hardcodeados. He modificado esa parte de los componentes Filter y NewAvertPage para que redux los almacene desde la API y los componentes los lean de redux. Solo se cargan una vez.
 
-El layout se compone de un header y un footer. En el header hay un título con enlace a '/adverts', dos navlinks hacia '/adverts' y '/adverts/new' y el botón de logout, que pide confirmación al ser pulsado.
+## Carga de anuncios
 
-## Listado de anuncios
+Los anuncios se cargan al entrar en /adverts y se almacenan en redux. No se vuelven a cargar más a menos que se recargue el navegador.
 
-Aquí aparecen todos los anuncios disponibles. Si no hay anuncios se mostrará un mensaje para indicarlo.
+Los anuncios se muestran de más reciente a más antiguo.
 
-Si hay anuncios, aparecen varios campos para filtrar los resultados. Si no hubiera resultados para una búsqueda concreta, se mostraría un mensaje indicándolo.
+## Detalle
 
-Nota: he intentado hace que las búsquedas se actualicen al ingresar en los campos, sin tener que pulsar el botón, pero no lo he conseguido...
+El detalle del anuncio lee la información desde redux, tomando, si la hay, la información de la lista de anuncios ya cargada (no hace nueva petición). Si no la hay, carga solo el anuncio pedido.
 
 ## Crear anuncio
 
-Formulario de creación de anuncio. Todos los campos son requeridos menos el de la foto. El botón de enviar solo se activa cuando hay algo en todos los campos requeridos.
+El anuncio creado se añade a la lista de anuncios en redux.
 
-## Detalle del anuncio
+## Borrar anuncio
 
-Vista en detalle del anuncio, con su foto, si la hubiera, o un placeholder en su lugar si no la hubiera.
+El anuncio borrado se elimina de la lista de anuncios en redux.
 
----
+## UI
+
+Los estados de carga y de error se leen y modifican siempre en redux.
+
+## Tests
+
+Hay 4 suites de tests (actions, reducers, selectores y el componente LoginPage).
 
 ## Getting Started with Create React App
 

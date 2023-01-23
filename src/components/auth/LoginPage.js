@@ -24,13 +24,9 @@ const LoginPage = ({ onLogin, ...props }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('1');
     await dispatch(authLogin({ email, password }, rememberMe));
-    console.log('2');
-
     const to = location.state?.from?.pathname || '/';
     navigate(to, { replace: true });
-    console.log('3');
   };
 
   const isButtonEnabled = () => email.length && password.length && !isLoading;

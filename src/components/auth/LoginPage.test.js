@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { defaultState } from '../../store/reducers.js';
 import LoginPage from './LoginPage.js';
 import { authLogin } from '../../store/actions.js';
-import { act } from '@testing-library/react';
 
 jest.mock('../../store/actions.js');
 
